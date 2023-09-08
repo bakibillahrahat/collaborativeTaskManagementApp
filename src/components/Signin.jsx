@@ -41,9 +41,9 @@ const Login = () => {
         if (email === '' || password === '') {
           setMessage('Please fill out the form.');
         } else if (user.email === email && user.password === password) {
-            const token = '97ad9fh9ad79adf'
+            const token = user.email;
             localStorage.setItem('token', token);
-            history('/dashboard')
+
         } else {
           setMessage('Invalid credentials. Please try again.');
         }

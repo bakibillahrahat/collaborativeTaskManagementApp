@@ -5,8 +5,6 @@ import Signin from './Signin';
 import Navbar from './Navbar';
 
 
-
-
 const Root = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   // Check authentication status when the component mounts
@@ -30,7 +28,7 @@ const Root = () => {
       <div className="gradient"></div>
     </div>
     <div className="app">
-        {isLoggedIn  === false ? <Signin/> : <Navbar/>}
+        {isLoggedIn && <Navbar/>}
         <Outlet />
     </div>
   </main>
