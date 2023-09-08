@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-const Signup = (props) => {
+const Signup = () => {
 
     const [name , setName ] = useState('');
     const [email, setEmail] = useState('');
@@ -66,10 +66,9 @@ const Signup = (props) => {
                         <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" onClick={handleSignup}>Sign up </button>
                         <p className="text-sm font-light text-gray-500">Don't have an account yeat? 
 
-                        <button onClick={() => props.onFormSwitch('signin')} className="font-medium text-primary-600 hover:underline" >Sign in</button></p>
-                        <p className="text-sm font-light text-danger">{message}</p>
-
+                        <a href="/signin" className="font-medium text-primary-600 hover:underline" >Sign in</a></p>
                     </form>
+                    <p className="text-sm font-light text-danger">{message}</p>
                 </div>
             </div>
         </div>

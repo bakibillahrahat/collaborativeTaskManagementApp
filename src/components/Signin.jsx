@@ -1,23 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Login = (props) => {
+
+const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
 
+    const history = useNavigate();
 
+    const RedirectExample = () => {
+        useEffect(() => {
+          const timeout = setTimeout(() => {
+            // 👇️ redirects to an external URL
+            window.location.replace('/dashboard');
+          }, 3000);
+      
+          return () => clearTimeout(timeout);
+        }, []);
+      
+        return <>Will redirect in 3 seconds...</>;
+      }
+      
+  
     const handleLogin = () => {
         const userData = localStorage.getItem(email);
-        const user = JSON.parse(userData)
-        if(email === '' || password === ''){
-            setMessage('Please fill up the form')
-        }else{
-            if(user.email === email && (password === user.password)){
-                setMessage('Login Successful');
-            }else{
-                setMessage('Invalid your credential');
-            }
+        // const user = JSON.parse(userData)
+        // if(email === '' || password === ''){
+        //     setMessage('Please fill up the form')
+        // }else{
+        //     if(user.email === email && (password === user.password)){
+        //         setMessage('Login Successful');
+        //     }else{
+        //         setMessage('Invalid your credential');
+        //     }
+        // }
+        const user = JSON.parse(userData);
+
+        if (email === '' || password === '') {
+          setMessage('Please fill out the form.');
+        } else if (user.email === email && user.password === password) {
+            const token = '97ad9fh9ad79adf'
+            localStorage.setItem('token', token);
+            history('/dashboard')
+        } else {
+          setMessage('Invalid credentials. Please try again.');
         }
   
     }
@@ -28,7 +56,7 @@ const Login = (props) => {
             <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">Sign in to your account</h1>
-                    <form action="#" className="space-y-4 md:space-y-6">
+                    <form action="/" className="space-y-4 md:space-y-6">
                         <div>
                             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
                             <input type="email" name="username" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="name@company.com" required="" onChange={(e) => setEmail(e.target.value)}/>
@@ -49,10 +77,9 @@ const Login = (props) => {
                             <a href="#" className="text-sm font-medium text-primary-600 hover:underline">Forget password?</a>
                         </div>
                         <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" onClick={handleLogin}>Sign in</button>
-                        <p className="text-sm font-light text-gray-500">Don't have an account yeat? <button onClick={() => props.onFormSwitch('signup')} className="font-medium text-primary-600 hover:underline">Sign up</button></p>
-
-                        <p className="text-sm font-light text-danger">{message}</p>
+                        <p className="text-sm font-light text-gray-500">Don't have an account yeat? <a href="/signup" className="font-medium text-primary-600 hover:underline">Sign up</a></p>
                     </form>
+                    <p className="text-sm font-light text-danger">{message}</p>
                 </div>
             </div>
         </div>
