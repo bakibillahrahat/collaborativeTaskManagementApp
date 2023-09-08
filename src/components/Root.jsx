@@ -1,12 +1,19 @@
 import { Outlet } from 'react-router-dom';
+import { useState, useEffect } from "react";
 
 import Signin from './Signin';
-import Dashboard from '../container/Dashboard';
+import Navbar from './Navbar';
 
 
 
 
 const Root = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // Check authentication status when the component mounts
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token); // Set isLoggedIn to true if token exists
+  }, []);
     const customSession = () => {
         const token = localStorage.getItem('token');
         if(!token === ''){
@@ -15,6 +22,7 @@ const Root = () => {
             return false
         }
     }
+
     
   return (
     <main>
@@ -22,8 +30,8 @@ const Root = () => {
       <div className="gradient"></div>
     </div>
     <div className="app">
+        {isLoggedIn  === false ? <Signin/> : <Navbar/>}
         <Outlet />
-        {customSession === false ? <Signin/> : <Dashboard/>}
     </div>
   </main>
   )
