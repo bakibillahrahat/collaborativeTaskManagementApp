@@ -4,10 +4,16 @@ import Signin from './Signin';
 import Dashboard from '../container/Dashboard';
 
 
+
+
 const Root = () => {
     const customSession = () => {
         const token = localStorage.getItem('token');
-        return token;
+        if(!token === ''){
+            return true
+        }else{
+            return false
+        }
     }
     
   return (
@@ -17,7 +23,7 @@ const Root = () => {
     </div>
     <div className="app">
         <Outlet />
-        {!customSession ? <Signin /> : <Dashboard/>}
+        {customSession === false ? <Signin/> : <Dashboard/>}
     </div>
   </main>
   )
