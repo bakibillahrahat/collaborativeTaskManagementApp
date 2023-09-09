@@ -1,3 +1,4 @@
+import AddTask from "../components/AddTask";
 
 // import Navbar from "../components/Navbar";
 const Dashboard = () => {
@@ -13,6 +14,7 @@ const Dashboard = () => {
   return (
     <div>
         <h1>Welcome to our Dashboard</h1>
+
     </div>
   )
 }
