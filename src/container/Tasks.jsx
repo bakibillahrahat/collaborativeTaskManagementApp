@@ -6,7 +6,6 @@ import AddTask from "../components/AddTask";
 
 const Tasks = () => {
   const [addTask, setAddTask] = useState(false);
-  const [data, setData] = useState("");
 
   const addTskHandle = () => {
     let token = localStorage.getItem("token");
@@ -85,13 +84,13 @@ const Tasks = () => {
                       d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
                     />
                   </svg>
-                  Add product
+                  Assign Task
                 </button>
                 {/* {Filter} */}
               </div>
             </div>
             <div className="overflow-x-auto">
-              <table className="w-full text-sm text-left text-gray-500 ">
+              <table className="w-full text-sm text-left text-gray-500">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                   <tr>
                     <th scope="col" className="px-4 py-4">
@@ -131,7 +130,7 @@ const Tasks = () => {
                       {task['date']}
                       </td>
                       <td className="px-4 py-3 flex items-center justify-end">
-                        <Menu as="div" className="relative ml-3">
+                        <Menu as="div" className="relative mr-6">
                           <Menu.Button
                             id="apple-imac-27-dropdown-button"
                             data-dropdown-toggle="apple-imac-27-dropdown"
@@ -156,7 +155,7 @@ const Tasks = () => {
                             leaveFrom="transform opacity-100 scale-100"
                             leaveTo="transform opacity-0 scale-95"
                           >
-                            <Menu.Items className="absolute ">
+                            <Menu.Items className="absolute -ml-12 bg-slate-50 z-50">
                               <Menu.Item>
                                 <button
                                   type="button"

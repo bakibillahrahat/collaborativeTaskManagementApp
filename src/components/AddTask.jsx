@@ -1,47 +1,53 @@
 import { useState } from "react";
 // eslint-disable-next-line react/prop-types
-const AddTask = ({setAddTask}) => {
-    const [taskName, setTaskName] = useState('');
-    const [progress, setProgress] = useState('');
-    const [date, setDate] = useState('');
-    const [description, setDescription] = useState('');
-    const [message, setMessage] = useState('');
+const AddTask = ({ setAddTask }) => {
+  const [taskName, setTaskName] = useState("");
+  const [progress, setProgress] = useState("");
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState("");
+  const [message, setMessage] = useState("");
 
-    const handleAddTask = () => {
-        const newTask = {
-            taskName,
-            progress,
-            date,
-            description
-        }
+  const handleAddTask = () => {
+    const newTask = {
+      taskName,
+      progress,
+      date,
+      description,
+    };
 
-        const token = localStorage.getItem('token');
-        const user = JSON.parse(localStorage.getItem(token));
-        const existTask = user['tasks'];
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem(token));
+    const existTask = user["tasks"];
 
-        if(taskName === '' || progress === '' || date === '' || description === ''){
-            setMessage('Please fill up the form');
-        }else{
-            if(existTask){
-                existTask.push(newTask);
-                localStorage.setItem(token, JSON.stringify(user));
-            }else{
-                setMessage("Data not Insterted!");
-            }
-        }
+    if (
+      taskName === "" ||
+      progress === "" ||
+      date === "" ||
+      description === ""
+    ) {
+      setMessage("Please fill up the form");
+    } else {
+      if (existTask) {
+        existTask.push(newTask);
+        localStorage.setItem(token, JSON.stringify(user));
+      } else {
+        setMessage("Data not Insterted!");
+      }
     }
+  };
   return (
     <div
       id="createProductModal"
-      className="-mt-20 z-10"
+      className=" overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
     >
-      <div className=" p-4 w-full max-w-2xl max-h-full">
+      <div className="relative p-4 w-full max-w-2xl max-h-full">
         <div className=" p-4 bg-white rounded-lg shadow sm:p-5">
           <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 ">
             <h3 className="text-lg font-semibold text-gray-900 ">
               Add Product
             </h3>
-            <button onClick={() => setAddTask(false)}
+            <button
+              onClick={() => setAddTask(false)}
               type="button"
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
               data-modal-target="createProductModal"
@@ -79,7 +85,8 @@ const AddTask = ({setAddTask}) => {
                   id="name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   placeholder="Type Task name"
-                  required="" onChange={(e) => setTaskName(e.target.value)}
+                  required=""
+                  onChange={(e) => setTaskName(e.target.value)}
                 />
               </div>
               <div>
@@ -95,7 +102,8 @@ const AddTask = ({setAddTask}) => {
                   id="progress"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   placeholder="Task Progress"
-                  required="" onChange={(e) => setProgress(e.target.value)}
+                  required=""
+                  onChange={(e) => setProgress(e.target.value)}
                 />
               </div>
               <div>
@@ -110,7 +118,8 @@ const AddTask = ({setAddTask}) => {
                   name="price"
                   id="price"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                  required="" onChange={(e) => setDate(e.target.value)}
+                  required=""
+                  onChange={(e) => setDate(e.target.value)}
                 />
               </div>
 
@@ -125,13 +134,15 @@ const AddTask = ({setAddTask}) => {
                   id="description"
                   rows="4"
                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 "
-                  placeholder="Write project description here" onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Write project description here"
+                  onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
               </div>
             </div>
             <button
               type="submit"
-              className="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" onClick={handleAddTask}
+              className="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              onClick={handleAddTask}
             >
               <svg
                 className="mr-1 -ml-1 w-6 h-6"
