@@ -38,7 +38,7 @@ const AddTask = ({ setAddTask }) => {
   return (
     <div
       id="createProductModal"
-      className="absolute  top-11 left-15"
+      className="absolute  top-11 left-15 ease-in"
     >
       <div className="relative p-4 w-full max-w-2xl max-h-full">
         <div className=" p-4 bg-white rounded-lg shadow sm:p-5">

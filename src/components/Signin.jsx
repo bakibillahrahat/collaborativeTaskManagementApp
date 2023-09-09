@@ -1,38 +1,13 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const history = useNavigate();
-
-  const RedirectExample = () => {
-    useEffect(() => {
-      const timeout = setTimeout(() => {
-        // 👇️ redirects to an external URL
-        window.location.replace("/dashboard");
-      }, 3000);
-
-      return () => clearTimeout(timeout);
-    }, []);
-
-    return <>Will redirect in 3 seconds...</>;
-  };
 
   const handleLogin = () => {
     const userData = localStorage.getItem(email);
-    // const user = JSON.parse(userData)
-    // if(email === '' || password === ''){
-    //     setMessage('Please fill up the form')
-    // }else{
-    //     if(user.email === email && (password === user.password)){
-    //         setMessage('Login Successful');
-    //     }else{
-    //         setMessage('Invalid your credential');
-    //     }
-    // }
     const user = JSON.parse(userData);
 
     if (email === "" || password === "") {

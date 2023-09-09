@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
-import Signin from './Signin';
 import Navbar from './Navbar';
 
 
@@ -12,15 +11,6 @@ const Root = () => {
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token); // Set isLoggedIn to true if token exists
   }, []);
-    const customSession = () => {
-        const token = localStorage.getItem('token');
-        if(!token === ''){
-            return true
-        }else{
-            return false
-        }
-    }
-
     
   return (
     <main>

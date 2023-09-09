@@ -5,7 +5,6 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
-import { useState } from "react";
 import Root from "./components/Root";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
