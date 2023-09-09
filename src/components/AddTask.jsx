@@ -15,16 +15,15 @@ const AddTask = ({setAddTask}) => {
             description
         }
 
-        const existTask = localStorage.getItem('task');
-    
-
         if(taskName === '' || progress === '' || date === '' || description === ''){
             setMessage('Please fill up the form');
-        }else if(existTask){
-            setMessage('Task already assign')
         }else{
-            localStorage.setItem('task', JSON.stringify(newTask));
+            const existTask = localStorage.getItem('task');
+            let data = JSON.parse(existTask)
+            data.push(newTask);
+            localStorage.setItem('task', JSON.stringify(data));
             setAddTask(false);
+            // setMessage("Some thing wrong");
         }
     }
   return (
