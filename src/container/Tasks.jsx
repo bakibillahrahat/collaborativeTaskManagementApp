@@ -6,14 +6,25 @@ import AddTask from "../components/AddTask";
 
 const Tasks = () => {
   const [addTask, setAddTask] = useState(false);
-  // const [task, setTask] = useState({});
+  const [data, setData] = useState("");
 
-  if (!localStorage.getItem("task")) {
-    localStorage.setItem("task", JSON.stringify([]));
-  }
-  const data = localStorage.getItem("task");
-  const task = JSON.parse(data);
-  console.log(task[0]["taskName"]);
+  const addTskHandle = () => {
+    let token = localStorage.getItem("token");
+    const userData = JSON.parse(localStorage.getItem(token));
+    if (!userData["tasks"]) {
+      userData["tasks"] = [];
+      localStorage.setItem(token, JSON.stringify(userData));
+    }
+  };
+  addTskHandle();
+
+  const showData = () => {
+    let token = localStorage.getItem("token");
+    const userData = JSON.parse(localStorage.getItem(token));
+    const tasks = userData["tasks"];
+    return tasks;
+  };
+
 
   return (
     <>
@@ -87,13 +98,13 @@ const Tasks = () => {
                       Task name
                     </th>
                     <th scope="col" className="px-4 py-3">
+                      Progress
+                    </th>
+                    <th scope="col" className="px-4 py-3">
                       Description
                     </th>
                     <th scope="col" className="px-4 py-3">
                       Date
-                    </th>
-                    <th scope="col" className="px-4 py-3">
-                      Progress
                     </th>
                     <th scope="col" className="px-4 py-3">
                       Action
@@ -102,19 +113,23 @@ const Tasks = () => {
                 </thead>
 
                 <tbody>
-                  {task.map((value, key) => {
-                    <tr className="border-b" key={key}>
+
+                  {showData().map((task, index) => {
+                    return (
+                    <tr className="border-b" key={index}>
                       <td
                         scope="row"
                         className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap "
                       >
-                        {value["taskName"]}
+                        {task['taskName']}
                       </td>
-                      <td className="px-4 py-3 max-w-[12rem] truncate">
-                        {value["description"]}
+                      <td className="px-4 py-3">
+                      {task['progress']}
                       </td>
-                      <td className="px-4 py-3">{value["title"]}</td>
-                      <td className="px-4 py-3 ">{value["progress"]}</td>
+                      <td className="px-4 py-3 max-w-[12rem] truncate">{task['description']}</td>
+                      <td className="px-4 py-3">
+                      {task['date']}
+                      </td>
                       <td className="px-4 py-3 flex items-center justify-end">
                         <Menu as="div" className="relative ml-3">
                           <Menu.Button
@@ -221,7 +236,8 @@ const Tasks = () => {
                           </Transition>
                         </Menu>
                       </td>
-                    </tr>;
+                    </tr>
+                    )
                   })}
                 </tbody>
               </table>

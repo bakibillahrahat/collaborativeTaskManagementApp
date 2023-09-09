@@ -15,15 +15,19 @@ const AddTask = ({setAddTask}) => {
             description
         }
 
+        const token = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem(token));
+        const existTask = user['tasks'];
+
         if(taskName === '' || progress === '' || date === '' || description === ''){
             setMessage('Please fill up the form');
         }else{
-            const existTask = localStorage.getItem('task');
-            let data = JSON.parse(existTask)
-            data.push(newTask);
-            localStorage.setItem('task', JSON.stringify(data));
-            setAddTask(false);
-            // setMessage("Some thing wrong");
+            if(existTask){
+                existTask.push(newTask);
+                localStorage.setItem(token, JSON.stringify(user));
+            }else{
+                setMessage("Data not Insterted!");
+            }
         }
     }
   return (
