@@ -30,10 +30,6 @@ const router = createBrowserRouter(
 );
 
 const App = () => {
-  const [currentForm, setCurrentForm] = useState("signin");
-  const toggleForm = (fornName) => {
-    setCurrentForm(fornName);
-  };
   return (
     <main>
       <RouterProvider router={router} />
